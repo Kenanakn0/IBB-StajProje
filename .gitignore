@@ -1,0 +1,26 @@
+# ---------- .NET ----------
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# appsettings: örnek dosya kalsın, gizli olanlar gitmesin
+appsettings.Development.json
+appsettings.Production.json
+
+# ---------- Angular / Node ----------
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-error.log*
+
+# ---------- Gizli / ortam ----------
+.env
+*.env
+secrets.json
+
+# ---------- IDE / OS ----------
+Thumbs.db
+.DS_Store
