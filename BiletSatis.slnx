@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BiletSatis.API/BiletSatis.API.csproj" />
+  <Project Path="BiletSatis.Application/BiletSatis.Application.csproj" />
+  <Project Path="BiletSatis.Domain/BiletSatis.Domain.csproj" />
+  <Project Path="BiletSatis.Infrastructure/BiletSatis.Infrastructure.csproj" />
+</Solution>
