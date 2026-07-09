@@ -86,7 +86,7 @@ Tahmin becerisini geliştirmek için her fazı bitirdikçe **gerçekleşen süre
 
 | Faz | Tahmini | Gerçekleşen | Fark |
 |---|---|---|---|
-| Faz 1 | 21 sa | | |
+| Faz 1 | 21 sa | 11 sa | 10 sa |
 | Faz 2 | 27 sa | | |
 | Faz 3 | 24 sa | | |
 | Faz 4 | 18 sa | | |
