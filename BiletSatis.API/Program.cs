@@ -18,6 +18,11 @@ builder.Services.AddDbContext<BiletSatisDbContext>(options =>
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ISalonService, SalonService>();
+builder.Services.AddScoped<IBolumService, BolumService>();
+builder.Services.AddScoped<IEtkinlikService, EtkinlikService>();
+builder.Services.AddScoped<IEtkinlikBolumService, EtkinlikBolumService>();
+builder.Services.AddScoped<IKoltukService, KoltukService>();
 
 // JWT doğrulama
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
