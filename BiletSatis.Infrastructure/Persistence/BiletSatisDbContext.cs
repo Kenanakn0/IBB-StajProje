@@ -22,7 +22,7 @@ public class BiletSatisDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // --- Para alanları: decimal(18,2) ---
+        // --- Para alanlari: decimal ---
         modelBuilder.Entity<EtkinlikBolum>().Property(x => x.Fiyat).HasPrecision(18, 2);
         modelBuilder.Entity<Bilet>().Property(x => x.OdenenTutar).HasPrecision(18, 2);
         modelBuilder.Entity<Indirim>().Property(x => x.Yuzde).HasPrecision(5, 2);
@@ -30,10 +30,7 @@ public class BiletSatisDbContext : DbContext
         // --- E-posta benzersiz olsun ---
         modelBuilder.Entity<Kullanici>().HasIndex(x => x.Eposta).IsUnique();
 
-        // --- Cascade path çakışmasını önlemek için bazı ilişkileri Restrict yap ---
-        // (Bilet ve Rezervasyon aynı anda birden çok tabloya bağlı olduğu için SQL Server
-        //  otomatik cascade delete'te "multiple cascade paths" hatası verir. Bunu engelliyoruz.)
-
+        // --- Cascade path cakismasini onlemek icin bazi iliskileri Restrict yap ---
         modelBuilder.Entity<EtkinlikBolum>()
             .HasOne(eb => eb.Etkinlik)
             .WithMany(e => e.EtkinlikBolumleri)
@@ -75,5 +72,21 @@ public class BiletSatisDbContext : DbContext
             .WithMany()
             .HasForeignKey(r => r.KoltukId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // --- Optimistic concurrency ---
+        modelBuilder.Entity<EtkinlikBolum>()
+            .Property(eb => eb.RowVersion)
+            .IsRowVersion();
+
+        // --- Cift satis onleme: ayni koltuk ayni etkinlik-bolumde iki kez satilamaz ---
+        modelBuilder.Entity<Bilet>()
+            .HasIndex(b => new { b.EtkinlikBolumId, b.KoltukId })
+            .IsUnique()
+            .HasFilter("[KoltukId] IS NOT NULL");
+
+        modelBuilder.Entity<Rezervasyon>()
+            .HasIndex(r => new { r.EtkinlikBolumId, r.KoltukId })
+            .IsUnique()
+            .HasFilter("[KoltukId] IS NOT NULL");
     }
 }

@@ -5,6 +5,7 @@ using BiletSatis.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using BiletSatis.API.BackgroundJobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,10 @@ builder.Services.AddScoped<IBolumService, BolumService>();
 builder.Services.AddScoped<IEtkinlikService, EtkinlikService>();
 builder.Services.AddScoped<IEtkinlikBolumService, EtkinlikBolumService>();
 builder.Services.AddScoped<IKoltukService, KoltukService>();
+builder.Services.AddScoped<IRezervasyonService, RezervasyonService>();
+builder.Services.AddHostedService<RezervasyonTemizleyici>();
+builder.Services.AddScoped<IIndirimHesaplayici, IndirimHesaplayici>();
+builder.Services.AddScoped<IBiletService, BiletService>();
 
 // JWT doğrulama
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

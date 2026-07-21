@@ -1,6 +1,5 @@
 namespace BiletSatis.Domain.Entities;
 
-// Bir etkinliğin bir bölümü: fiyat ve kontenjan burada tutulur
 public class EtkinlikBolum
 {
     public int Id { get; set; }
@@ -16,4 +15,5 @@ public class EtkinlikBolum
 
     public ICollection<Rezervasyon> Rezervasyonlar { get; set; } = new List<Rezervasyon>();
     public ICollection<Bilet> Biletler { get; set; } = new List<Bilet>();
+    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
 }
